@@ -1,6 +1,7 @@
 import React from 'react';
+import emailjs from '@emailjs/browser';
+import { useState, useEffect, useRef, FormEvent } from 'react';
 import { Github, Mail, Linkedin, ExternalLink, Menu, X } from 'lucide-react';
-import { useState, useEffect } from 'react';
 
 interface Project {
   title: string;
@@ -69,6 +70,8 @@ const techStack: TechCategory[] = [
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const formRef = useRef<HTMLFormElement>(null);
 
   const sections = ["home", "about", "tech", "projects", "contact"];
 
@@ -81,6 +84,30 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormStatus('loading');
+
+    try {
+      // Replace these with your actual EmailJS service, template, and user IDs
+      await emailjs.sendForm(
+        'service_gdt8wsj',  // Create service ID at EmailJS dashboard
+        'template_mjbgp3n', // Create an email template at EmailJS dashboard
+        formRef.current!,
+        'QYjJ24Yh4fZzsy0Xu'      // Your EmailJS public key
+      );
+      setFormStatus('success');
+      
+      // Reset form
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      setFormStatus('error');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -268,40 +295,72 @@ function App() {
                 </a>
               </div>
             </div>
-            <form className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  className="w-full px-4 py-3 bg-transparent border-2 border-white focus:outline-none"
-                  placeholder="Your name"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  className="w-full px-4 py-3 bg-transparent border-2 border-white focus:outline-none"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
-                <textarea 
-                  id="message" 
-                  rows={5} 
-                  className="w-full px-4 py-3 bg-transparent border-2 border-white focus:outline-none"
-                  placeholder="Your message..."
-                />
-              </div>
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                className="w-full px-4 py-3 bg-transparent border-2 border-white focus:outline-none"
+                placeholder="Your name"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                className="w-full px-4 py-3 bg-transparent border-2 border-white focus:outline-none"
+                placeholder="your.email@example.com"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="title" className="block text-sm font-medium mb-2">Subject</label>
+              <input 
+                type="text" 
+                id="title" 
+                name="title" 
+                className="w-full px-4 py-3 bg-transparent border-2 border-white focus:outline-none"
+                placeholder="What's this regarding?"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows={5} 
+                className="w-full px-4 py-3 bg-transparent border-2 border-white focus:outline-none"
+                placeholder="Your message..."
+                required
+              />
+            </div>
               <button 
                 type="submit" 
-                className="px-8 py-3 border-2 border-white hover:bg-white hover:text-black transition-colors"
+                disabled={formStatus === 'loading'}
+                className={`px-8 py-3 border-2 border-white hover:bg-white hover:text-black transition-colors ${
+                  formStatus === 'loading' ? 'opacity-70 cursor-not-allowed' : ''
+                }`}
               >
-                Send Message
+                {formStatus === 'loading' ? 'Sending...' : 'Send Message'}
               </button>
+              
+              {formStatus === 'success' && (
+                <div className="mt-4 p-3 bg-green-600 text-white">
+                  Message sent successfully! I'll get back to you soon.
+                </div>
+              )}
+              
+              {formStatus === 'error' && (
+                <div className="mt-4 p-3 bg-red-600 text-white">
+                  Failed to send message. Please try again or email me directly.
+                </div>
+              )}
             </form>
           </div>
         </div>
@@ -312,13 +371,13 @@ function App() {
         <div className="max-w-7xl mx-auto text-center">
           <p className="mb-4">© {new Date().getFullYear()} Daniel The Developer. All rights reserved.</p>
           <div className="flex justify-center gap-4">
-            <a href="mailto:your.email@example.com" className="hover:text-gray-400 transition-colors">
+            <a href="mailto:danieltanurhan@gmail.com" className="hover:text-gray-400 transition-colors">
               <Mail size={20} />
             </a>
-            <a href="https://github.com/yourusername" className="hover:text-gray-400 transition-colors">
+            <a href="https://github.com/danieltanurhan" className="hover:text-gray-400 transition-colors">
               <Github size={20} />
             </a>
-            <a href="https://linkedin.com/in/yourusername" className="hover:text-gray-400 transition-colors">
+            <a href="https://linkedin.com/in/danieltanurhan" className="hover:text-gray-400 transition-colors">
               <Linkedin size={20} />
             </a>
           </div>
