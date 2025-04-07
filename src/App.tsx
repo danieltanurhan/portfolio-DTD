@@ -15,22 +15,22 @@ const projects: Project[] = [
     title: "Bartalogistics",
     description: "A comprehensive logistics platform connecting businesses to international shipping services. The system streamlines supply chain operations, enabling seamless transport coordination across multiple modes while providing detailed analytics and document generation.",
     tech: ["Next.js", "React", "Tailwind CSS", "Sanity CMS", "Firebase", "Vercel Analytics", "PDF-lib", "SendGrid"],
-    link: "https://bartalogistics.vercel.app",
-    github: "https://github.com/danieltanurhan/bartalogistics"
+    link: "https://bartalogistics-git-master-daniel-tanurhans-projects.vercel.app/",
+    github: "https://github.com/danieltanurhan/danieltanurhan/blob/main/bartalogistics/README.md"
   },
   {
     title: "PokerBolt",
     description: "PokerBolt is a sophisticated real-time multiplayer Texas Hold'em poker application that delivers an authentic poker experience through a modern tech stack. It features secure authentication, custom table creation, and responsive design.",
     tech: ["Next.js", "Node.js", "Express.js", "MongoDB", "Socket.IO", "JWT", "Tailwind CSS"],
-    link: "N/A",
-    github: "https://github.com/danieltanurhan/pokerbolt"
+    link: "https://pokerbolt.vercel.app/",
+    github: "https://github.com/danieltanurhan/danieltanurhan/blob/main/pokerbolt/README.md"
   },
   {
     title: "Res-Frontend",
     description: "A comprehensive restaurant ordering platform built with modern web technologies, enabling customers to browse menus, customize orders, and complete purchases with real-time order tracking and secure payment integration.",
     tech: ["Next.js", "React", "Tailwind CSS", "Zustand", "NextAuth.js", "SquareSDK", "MongoDB", "MySQL"],
-    link: "https://res-frontend-two.vercel.app",
-    github: "https://github.com/danieltanurhan/res-frontend"
+    link: "https://github.com/danieltanurhan/danieltanurhan/blob/main/res-frontend/README.md",
+    github: "https://github.com/danieltanurhan/danieltanurhan/blob/main/res-frontend/README.md"
   },
 ];
 
