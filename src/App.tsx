@@ -13,26 +13,25 @@ interface Project {
 const projects: Project[] = [
   {
     title: "Bartalogistics",
-    description: "A Next.js project bootstrapped with create-next-app for logistics management.",
-    tech: ["Next.js", "JavaScript"],
+    description: "A comprehensive logistics platform connecting businesses to international shipping services. The system streamlines supply chain operations, enabling seamless transport coordination across multiple modes while providing detailed analytics and document generation.",
+    tech: ["Next.js", "React", "Tailwind CSS", "Sanity CMS", "Firebase", "Vercel Analytics", "PDF-lib", "SendGrid"],
     link: "https://bartalogistics.vercel.app",
     github: "https://github.com/danieltanurhan/bartalogistics"
   },
   {
     title: "PokerBolt",
-    description: "A real-time multiplayer Texas Hold'em poker application with a Node.js/Express backend and Next.js frontend.",
-    tech: ["Next.js", "Node.js", "Express.js", "MongoDB", "Socket.IO", "TypeScript"],
+    description: "PokerBolt is a sophisticated real-time multiplayer Texas Hold'em poker application that delivers an authentic poker experience through a modern tech stack. It features secure authentication, custom table creation, and responsive design.",
+    tech: ["Next.js", "Node.js", "Express.js", "MongoDB", "Socket.IO", "JWT", "Tailwind CSS"],
     link: "N/A",
     github: "https://github.com/danieltanurhan/pokerbolt"
   },
   {
     title: "Res-Frontend",
-    description: "A frontend application built with TypeScript.",
-    tech: ["TypeScript"],
+    description: "A comprehensive restaurant ordering platform built with modern web technologies, enabling customers to browse menus, customize orders, and complete purchases with real-time order tracking and secure payment integration.",
+    tech: ["Next.js", "React", "Tailwind CSS", "Zustand", "NextAuth.js", "SquareSDK", "MongoDB", "MySQL"],
     link: "https://res-frontend-two.vercel.app",
     github: "https://github.com/danieltanurhan/res-frontend"
   },
-  // Add your real projects here
 ];
 
 interface TechCategory {
@@ -51,7 +50,7 @@ const techStack: TechCategory[] = [
   },
   {
     name: "Database",
-    skills: ["PostgreSQL", "MongoDB", "Redis", "MySQL"]
+    skills: ["MySQL", "MongoDB", "Redis"]
   },
   {
     name: "DevOps & Tools",
@@ -63,7 +62,7 @@ const techStack: TechCategory[] = [
   },
   {
     name: "Game Development",
-    skills: ["Java", "Swing"]
+    skills: ["Java", "Godot", "C#", "C++"]
   }
 ];
 
@@ -172,9 +171,8 @@ function App() {
                 Looking for new opportunities to create impactful solutions.
               </p>
               <p className="text-lg md:text-xl leading-relaxed">
-                I'm passionate about creating elegant, efficient code and designing intuitive user experiences.
-                My approach combines technical excellence with creative problem-solving to build applications
-                that not only function flawlessly but also delight users.
+                I'm passionate about creating good experiences. My approach combines technical excellence with free flow creativeness
+                to build applications that look and feel a delight.
               </p>
             </div>
           </div>
