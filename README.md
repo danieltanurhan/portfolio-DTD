@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS showcasing my skills, projects, and professional background.
 
-![Portfolio Preview](./public/portfolio-preview.png)
+[![Portfolio Preview](./public/portfolio-preview.png)](https://danielthedeveloper.vercel.app)
 
 ## 🚀 Live Demo
 
