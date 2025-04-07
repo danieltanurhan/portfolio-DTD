@@ -1,7 +1,8 @@
 import React from 'react';
 import emailjs from '@emailjs/browser';
-import { useState, useEffect, useRef, FormEvent } from 'react';
-import { Github, Mail, Linkedin, ExternalLink, Menu, X } from 'lucide-react';
+import { useState, useRef, FormEvent } from 'react';
+import { Github, Mail, Linkedin, ExternalLink } from 'lucide-react';
+import Navigation from './components/Navigation';
 
 interface Project {
   title: string;
@@ -68,34 +69,21 @@ const techStack: TechCategory[] = [
 ];
 
 function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const formRef = useRef<HTMLFormElement>(null);
 
   const sections = ["home", "about", "tech", "projects", "contact"];
-
-  // Track scroll position for navigation effects
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus('loading');
 
     try {
-      // Replace these with your actual EmailJS service, template, and user IDs
       await emailjs.sendForm(
-        'service_gdt8wsj',  // Create service ID at EmailJS dashboard
-        'template_mjbgp3n', // Create an email template at EmailJS dashboard
+        'service_gdt8wsj',
+        'template_mjbgp3n',
         formRef.current!,
-        'QYjJ24Yh4fZzsy0Xu'      // Your EmailJS public key
+        'QYjJ24Yh4fZzsy0Xu'
       );
       setFormStatus('success');
       
@@ -111,61 +99,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Sticky Navigation */}
-      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrollPosition > 100 ? 'bg-black text-white shadow-lg py-3' : 'bg-transparent py-5'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            <a href="#home" className="text-xl font-bold">DTD</a>
-            
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button 
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-white focus:outline-none"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-8">
-              {sections.map((section) => (
-                <a 
-                  key={section} 
-                  href={`#${section}`} 
-                  className="capitalize hover:text-gray-400 transition-colors"
-                >
-                  {section}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-        
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden fixed inset-0 bg-black bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-8">
-            <button 
-              onClick={() => setIsMenuOpen(false)}
-              className="absolute top-5 right-5 text-white"
-            >
-              <X size={24} />
-            </button>
-            {sections.map((section) => (
-              <a 
-                key={section} 
-                href={`#${section}`} 
-                className="text-white text-2xl capitalize hover:text-gray-400 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {section}
-              </a>
-            ))}
-          </div>
-        )}
-      </nav>
+      {/* Use the new Navigation component */}
+      <Navigation sections={sections} />
 
       {/* Hero Section */}
       <header id="home" className="min-h-screen px-4 py-16 md:py-32 bg-black text-white flex items-center">
